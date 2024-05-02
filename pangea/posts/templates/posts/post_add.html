@@ -1,0 +1,82 @@
+{% extends 'posts/base.html' %}
+{% load static %}
+{% block title %}Подать объявление{% endblock %}
+{% block css %}
+<link href="{% static 'css/posts/post_add.css' %}" rel="stylesheet" />{% endblock %}
+{% block content %}
+<div class="post-add_wrapper" style="margin-top: 5%;">
+    <div class="post_detail_wrapper">
+        <div class="">
+          <h5>Пример картинки</h5>
+          <img src="/media/post_images/images.jpg" alt="Дом, 1 девочка" class="post_img">
+          
+        </div>
+        <div class="d-flex flex-column w-100">
+          <div class="title-cost_block">
+            <h5 class="post_detail_title">Пример: Дом, 1 девочка <span></span></h5>
+            
+            <div class="d-flex">
+              <div class="post_detail_cost">Цена: 12000тг</div>
+            </div>
+            
+          </div>
+          <div class="post_detail_desc">Приветствую всех!Я ищу одного или двух сожителей для совместной аренды просторной и уютной [указать тип квартиры] в [указать район]. Квартира находится в отличном состоянии, имеет [перечислить преимущества: например, "современную кухню", "большую гостиную", "отдельный балкон", "вид на город"].Я [кратко о себе: например, "спокойный человек", "люблю чистоту", "увлекаюсь [увлечения]", "работаю в [сфера деятельности]"]. Ищу аккуратных, чистоплотных и [перечислить желаемые качества сожителей: например, "вежливых", "ответственных", "неконфликтных", "с похожими режимом дня"].Арендная плата составляет [указать сумму] рублей в месяц, с учетом оплаты [перечислить, что входит в плату: например, "коммунальных услуг", "интернета", "телевидения"].Заинтересованных прошу писать в личные сообщения, рассказывая немного о себе.Буду рад новым знакомствам и комфортному совместному проживанию!</div>
+          <hr>  
+          </div>
+        </div>
+    
+      </div>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}  
+        <div class="form-group">
+            <label for="title">{{ form.title.label }}</label>
+            {{ form.title }}
+            {% if form.title.errors %}
+                <div class="invalid-feedback">
+                    {% for error in form.title.errors %}
+                        {{ error }}
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            <label for="description">{{ form.description.label }}</label>
+            {{ form.description }}
+            {% if form.description.errors %}
+                <div class="invalid-feedback">
+                    {% for error in form.description.errors %}
+                        {{ error }}
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            <label for="cost">{{ form.cost.label }}</label>
+            {{ form.cost }}
+            {% if form.cost.errors %}
+                <div class="invalid-feedback">
+                    {% for error in form.cost.errors %}
+                        {{ error }}
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            <label for="image">{{ form.image.label }}</label>
+            {{ form.image }}
+            {% if form.image.errors %}
+                <div class="invalid-feedback">
+                    {% for error in form.image.errors %}
+                        {{ error }}
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+
+        <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+</div>
+{% endblock %}
